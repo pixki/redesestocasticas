@@ -3,7 +3,7 @@
 # @Author: pixki
 # @Date:   2015-11-11 12:07:40
 # @Last Modified by:   Jairo Sánchez
-# @Last Modified time: 2015-12-02 11:51:32
+# @Last Modified time: 2015-12-02 12:24:35
 
 import numpy as np
 from scipy.stats import expon, erlang, rv_continuous
@@ -77,8 +77,8 @@ def main():
                         dest='graph', action='store_true')
     parser.set_defaults(graph=True)
     args = parser.parse_args()
-    msg = 'Distribución {3} con {0} etapas (lambda={1}) en {2} ejecuciones'
-    print msg.format(args.stages, args.lambdap, args.runs, args.dist)
+    # msg = 'Distribución {3} con {0} etapas (lambda={1}) en {2} ejecuciones'
+    # print msg.format(args.stages, args.lambdap, args.runs, args.dist)
     fig, ax = plt.subplots(1, 1)
     if args.dist in 'erlang':
         if args.stages <= 0:
