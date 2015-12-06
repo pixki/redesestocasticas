@@ -3,7 +3,7 @@
 # @Author: Jairo Sánchez
 # @Date:   2015-12-02 12:03:38
 # @Last Modified by:   jairo
-# @Last Modified time: 2015-12-04 16:33:48
+# @Last Modified time: 2015-12-05 02:30:42
 
 
 import argparse
@@ -21,7 +21,8 @@ def valid(matrix):
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Simulador de cadenas de\
+        Markov en tiempo discreto.')
     parser.add_argument('-m', '--mfile', required=True,
                         help='Archivo con la matriz de transición.')
     parser.add_argument('-s', '--steps', required=True, type=int,
