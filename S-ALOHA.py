@@ -3,10 +3,11 @@
 # @Author: jairo
 # @Date:   2015-12-04 22:06:44
 # @Last Modified by:   jairo
-# @Last Modified time: 2015-12-04 23:59:23
+# @Last Modified time: 2015-12-08 14:31:58
 import numpy as np
 import argparse
 from scipy import misc as sc
+import sys
 
 
 def main():
@@ -17,16 +18,10 @@ def main():
                         help='Probabilidad de reenvío')
     parser.add_argument('-m', '--nodes', type=int, required=True,
                         help='Cantidad de nodos')
-    parser.add_argument('-o', '--output', type=str, required=True,
-                        choices=['console', 'file'],
-                        help='Tipo de salida que ofrece este programa')
-    parser.add_argument('-f', '--file', type=str, required=False,
+    parser.add_argument('-f', '--file', type=argparse.FileType('w'),
+                        required=False, default=sys.stdout,
                         help='Archivo de salida (usado con la opción -o)')
     args = parser.parse_args()
-
-    if 'file' in args.output and args.file in '':
-        print 'Error: No se ha suministrado archivo de salida'
-        exit(-1)
 
     P = np.array([0.]*(args.nodes+1)**2)
     P.shape = (args.nodes+1, args.nodes+1,)
@@ -49,13 +44,8 @@ def main():
                 pr = sc.comb(M-i, j-i)*sigma**(j-i)*(1.-sigma)**(M-j)
             P[i, j] = pr
 
-    if 'console' in args.output:
-        print P
-        # Se suma por filas, y se obtiene solamente la ultima columna
-        b = np.cumsum(P, axis=1)[:, -1]
-        print b
-    elif 'file' in args.output:
-        np.savetxt(args.file, P, delimiter=',')
+    # Imprime a la salida (archivo o stdout) con precision de 8 decimales
+    np.savetxt(args.file, P, delimiter=',', fmt='%.8f')
 
 
 if __name__ == '__main__':

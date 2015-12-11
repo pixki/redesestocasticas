@@ -4,8 +4,52 @@
 		"selected_items":
 		[
 			[
+				"Tue",
+				"True	instance"
+			],
+			[
+				"sta",
+				"stationay_d	param"
+			],
+			[
+				"st",
+				"stdout	instance"
+			],
+			[
+				"sup",
+				"suppress	param"
+			],
+			[
+				"iter",
+				"iterations	statement"
+			],
+			[
+				"su",
+				"sum	function"
+			],
+			[
+				"cum",
+				"cumsum	function"
+			],
+			[
+				"save",
+				"savetxt	function"
+			],
+			[
+				"o",
+				"output"
+			],
+			[
+				"A",
+				"ArgumentParser	class"
+			],
+			[
+				"pars",
+				"parse_args	function"
+			],
+			[
 				"matr",
-				"matriz"
+				"matrix	statement"
 			],
 			[
 				"if",
@@ -26,10 +70,6 @@
 			[
 				"lambda",
 				"lambdap"
-			],
-			[
-				"sta",
-				"stages"
 			]
 		]
 	},
@@ -47,7 +87,23 @@
 			"file": "dtmc-csim.py",
 			"settings":
 			{
-				"buffer_size": 1302,
+				"buffer_size": 1836,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "dtmc-gs.py",
+			"settings":
+			{
+				"buffer_size": 2680,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "S-ALOHA.py",
+			"settings":
+			{
+				"buffer_size": 2177,
 				"line_ending": "Unix"
 			}
 		},
@@ -56,6 +112,14 @@
 			"settings":
 			{
 				"buffer_size": 182,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/jairo/Software/pipetest.py",
+			"settings":
+			{
+				"buffer_size": 597,
 				"line_ending": "Unix"
 			}
 		}
@@ -125,7 +189,12 @@
 	],
 	"file_history":
 	[
+		"/home/jairo/.cache/.fr-jdGNTs/Season2 Episode 1.srt",
+		"/media/jairo/Auxiliar/Otros/actrees1",
+		"/home/jairo/Software/redesestocasticas/SALOHA.py",
 		"/home/jairo/.config/sublime-text-3/Packages/User/Python.sublime-settings",
+		"/home/jairo/.config/sublime-text-3/Packages/User/Plain text.sublime-settings",
+		"/home/jairo/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
 		"/home/jairo/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/pixki/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
 		"/home/jairo/Software/redesestocasticas/dtmc.py",
@@ -168,7 +237,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -242,11 +311,11 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 612.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -255,15 +324,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1302,
+						"buffer_size": 1836,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								308,
-								308
+								690,
+								690
 							]
 						],
 						"settings":
@@ -322,11 +391,164 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "dtmc-gs.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2680,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1578,
+								1578
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								223,
+								12,
+								4,
+								11,
+								35,
+								15,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 357.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "S-ALOHA.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1285,
+								1285
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								223,
+								12,
+								4,
+								23,
+								59,
+								23,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "ctmc.py",
 					"semi_transient": false,
 					"settings":
@@ -398,6 +620,81 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/jairo/Software/pipetest.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 597,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								478,
+								478
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								223,
+								12,
+								7,
+								12,
+								37,
+								56,
+								0,
+								0,
+								0,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 2,
 					"type": "text"
 				}
@@ -410,7 +707,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 33.0
 	},
 	"layout":
 	{
