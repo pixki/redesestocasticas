@@ -1,5 +1,8 @@
 # redesestocasticas
-Scripts y programas desarrollados para la materia de redes estocásticas
+Scripts y programas desarrollados para la materia de redes estocásticas. Para ejecutar los scripts se requiere de:
+	-NumPy
+	-SciPy
+	-MatPlotLib
 
 S-ALOHA.py   
 ==========
