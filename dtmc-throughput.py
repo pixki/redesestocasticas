@@ -3,7 +3,7 @@
 # @Author: jairo
 # @Date:   2015-12-08 15:14:46
 # @Last Modified by:   jairo
-# @Last Modified time: 2015-12-09 17:40:12
+# @Last Modified time: 2015-12-11 19:39:47
 import argparse
 import numpy as np
 from scipy import misc as sc
@@ -12,6 +12,7 @@ from matplotlib import cm
 from matplotlib.ticker import LinearLocator, FormatStrFormatter
 import matplotlib.pyplot as plt
 import colormaps as cmaps
+import sys
 
 
 def throughput(stationay_d, M, sigma, tau):
@@ -26,7 +27,6 @@ def throughput(stationay_d, M, sigma, tau):
         P[k] = (M-k)*sigma*(1.-sigma)**(M-k-1)*(1.-tau)**k \
                + k*tau*(1.-tau)**(k-1)*(1.-sigma)**(M-k)
 
-    print P
     return np.sum(P*stationay_d)
 
 
@@ -117,7 +117,38 @@ def simulate_MC(tr_matrix, steps, initial_st=0):
     return P/total_steps
 
 
+def directo(tr_matrix, x0=1.):
+    """Calcula la distribución estacionaria de una cadena de Markov
+       mediante el método directo. La fórmula para calcular cada término es
+
+              x_{k+1} = x_k - \sum_{i=0; i\neq k}^M  x_i*P_{i,k}
+                                       P_{(k+1),k}
+
+
+       tr_matrix - Matriz de transición a resolver
+       x0 - Valor inicial para x_0
+
+       returns - El vector con la distribución estacionaria encontrada
+    """
+    SD = np.zeros((tr_matrix.shape[0],), dtype=np.float64)
+    SD[0] = x0
+    for i in range(tr_matrix.shape[0] - 1):
+        Px = np.array(tr_matrix[:, i])
+        Px[i+1] = 0.
+        SD[i+1] = (SD[i] - np.sum(Px*SD))/tr_matrix[i+1, i]
+
+    # Se regresa el vector normalizado
+    return SD/np.sum(SD)
+
+
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--procedure', type=str, required=True,
+                        help='Procedimiento por el cual resolver la matriz de \
+                        transición',
+                        choices=['simulation', 'gauss', 'directo'])
+    args = parser.parse_args()
+
     np.set_printoptions(precision=7, suppress=True)
     plt.register_cmap(name='viridis', cmap=cmaps.viridis)
 
@@ -128,23 +159,24 @@ def main():
     Y = np.linspace(0.001, 0.9999, num=50)
     Z = np.array([0.]*X.shape[0]*Y.shape[0])
     Z.shape = (X.shape[0], Y.shape[0])
-    print X
-    print '--------------------'
-    print Y
     for i in range(X.shape[0]):
         for j in range(Y.shape[0]):
             matrix = SALOHA_gen(M, X[i], Y[j])
-            # P1 = gauss(matrix, np.array([1./(M+1)]*(M+1)), M+1)
-            P2 = simulate_MC(matrix, 100000)
+            if 'gauss' in args.procedure:
+                P = gauss(matrix, np.array([1./(M+1)]*(M+1)), M+1)
+            elif 'simulation' in args.procedure:
+                P = simulate_MC(matrix, 100000)
+            elif 'directo' in args.procedure:
+                P = directo(matrix, 1)
             print 'SALOHA({0},{1})'.format(X[i], Y[j])
-            Z[i][j] = throughput(P2, M, X[i], Y[j])
+            Z[i][j] = throughput(P, M, X[i], Y[j])
 
     X, Y = np.meshgrid(X, Y)
     plt.xlabel('sigma')
     plt.ylabel('tau')
     surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cmaps.viridis,
                            linewidth=0, antialiased=False, vmin=0.,
-                           vmax=0.5)
+                           vmax=0.5, alpha=1.0, shade=False)
     ax.set_zlim(0, 1.01)
     ax.zaxis.set_major_locator(LinearLocator(10))
     ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
