@@ -3,7 +3,7 @@
 # @Author: jairo
 # @Date:   2015-12-04 22:06:44
 # @Last Modified by:   jairo
-# @Last Modified time: 2015-12-08 14:31:58
+# @Last Modified time: 2015-12-17 12:49:04
 import numpy as np
 import argparse
 from scipy import misc as sc
@@ -45,6 +45,7 @@ def main():
             P[i, j] = pr
 
     # Imprime a la salida (archivo o stdout) con precision de 8 decimales
+    # y separados por comas (CSV)
     np.savetxt(args.file, P, delimiter=',', fmt='%.8f')
 
 

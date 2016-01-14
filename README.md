@@ -5,7 +5,7 @@ Scripts y programas desarrollados para la materia de redes estocásticas. Para e
 	-MatPlotLib
 
 S-ALOHA.py   
-==========
+----------
 
 Genera matrices de transición de acuerdo al modelo de ALOHA ranurado de población finita sin colas. La salida puede ser "pipeada" a otro script/proceso o guardada como archivo CSV (Excel, Calc, ...)
 

@@ -3,7 +3,7 @@
 # @Author: jairo
 # @Date:   2015-12-08 15:14:46
 # @Last Modified by:   jairo
-# @Last Modified time: 2015-12-11 19:39:47
+# @Last Modified time: 2015-12-17 12:49:04
 import argparse
 import numpy as np
 from scipy import misc as sc
@@ -155,6 +155,7 @@ def main():
     M = 10
     fig = plt.figure()
     ax = fig.gca(projection='3d')
+    # Con un mayor número de muestras se empieza a 'laggear' el visualizador
     X = np.linspace(0.001, 0.9999, num=50)
     Y = np.linspace(0.001, 0.9999, num=50)
     Z = np.array([0.]*X.shape[0]*Y.shape[0])
