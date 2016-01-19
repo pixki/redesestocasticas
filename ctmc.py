@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Jairo Sánchez
 # @Date:   2015-12-02 12:03:55
-# @Last Modified by:   jairo
-# @Last Modified time: 2016-01-18 14:08:29
+# @Last Modified by:   Jairo Sánchez
+# @Last Modified time: 2016-01-19 15:46:28
 import numpy as np
 from scipy import misc as sc
 from scipy.stats import expon
@@ -106,14 +106,15 @@ def main():
     Z.shape = (X.shape[0], Y.shape[0])
     for i in range(X.shape[0]):
         for j in range(Y.shape[0]):
+            mu = args.lambd / Y[j]
             if 'gauss' in args.method:
-                P = bcc_gauss(X[i], args.lambd, args.lambd / Y[i])
+                P = bcc_gauss(X[i], args.lambd, mu)
             elif 'simulation' in args.method:
-                P = bcc_sim(X[i], args.lambd, args.lambd/Y[i], 1000)
+                P = bcc_sim(X[i], args.lambd, mu, 1000)
             elif 'recursive' in args.method:
-                P = bcc_recursive(X[i], args.lambd, args.lambd / Y[i])
+                P = bcc_recursive(X[i], args.lambd, mu)
             print 'P[S]=', P[-1], ' lambda=', args.lambd, ' mu=',
-            print args.lambd/Y[i], ', S=', X[i]
+            print mu, ', S=', X[i]
 
             Z[i][j] = P[-1]
 
