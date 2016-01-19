@@ -3,11 +3,16 @@
 # @Author: Jairo Sánchez
 # @Date:   2015-12-02 12:03:55
 # @Last Modified by:   jairo
-# @Last Modified time: 2016-01-15 19:01:28
+# @Last Modified time: 2016-01-18 14:08:29
 import numpy as np
 from scipy import misc as sc
 from scipy.stats import expon
 import argparse
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+from matplotlib.ticker import LinearLocator, FormatStrFormatter
+import matplotlib.pyplot as plt
+import colormaps as cmaps
 
 
 def bcc_recursive(S, lambd, mu):
@@ -82,22 +87,50 @@ def bcc_sim(S, lambd, mu, simtime):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-S', '--servers', type=int, required=True,
-                        help='Cantidad de servidores disponibles')
+    parser.add_argument('-m', '--method', type=str, required=True,
+                        help='Metodo a usar para resolver el sistema',
+                        choices=['gauss', 'simulation', 'recursive'])
     parser.add_argument('-l', '--lambd', type=float, required=True,
-                        help='Tasa de arribo de nuevos clientes')
-    parser.add_argument('-m', '--mu', type=float, required=True,
-                        help='Tasa de egreso de clientes')
+                        help='Tasa de arribos, mu se calcula dado el cociente')
     args = parser.parse_args()
 
-    a = bcc_recursive(args.servers, args.lambd, args.mu)
-    print a, np.sum(a)
+    np.set_printoptions(precision=7, suppress=True)
+    plt.register_cmap(name='viridis', cmap=cmaps.viridis)
 
-    b = bcc_gauss(4, 2, 1)
-    print b, np.sum(b)
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
+    # Con un mayor número de muestras se empieza a 'laggear' el visualizador
+    X = np.arange(1, 51)    # Numero de servidores (S=[0, 49])
+    Y = np.linspace(0.1, 4.9999, num=50)   # a = lambda/mu
+    Z = np.array([0.]*X.shape[0]*Y.shape[0])
+    Z.shape = (X.shape[0], Y.shape[0])
+    for i in range(X.shape[0]):
+        for j in range(Y.shape[0]):
+            if 'gauss' in args.method:
+                P = bcc_gauss(X[i], args.lambd, args.lambd / Y[i])
+            elif 'simulation' in args.method:
+                P = bcc_sim(X[i], args.lambd, args.lambd/Y[i], 1000)
+            elif 'recursive' in args.method:
+                P = bcc_recursive(X[i], args.lambd, args.lambd / Y[i])
+            print 'P[S]=', P[-1], ' lambda=', args.lambd, ' mu=',
+            print args.lambd/Y[i], ', S=', X[i]
 
-    c = bcc_sim(4, 2, 1, 100000)
-    print c, np.sum(c)
+            Z[i][j] = P[-1]
+
+    X, Y = np.meshgrid(X, Y)
+    plt.xlabel('S')
+    plt.ylabel('a=lambda/mu')
+    surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cmaps.viridis,
+                           linewidth=0, antialiased=True, alpha=1.0,
+                           shade=False)
+    # ax.set_zlim(0, 1.0)
+    ax.zaxis.set_major_locator(LinearLocator(10))
+    ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
+
+    fig.colorbar(surf, shrink=0.5, aspect=5)
+
+    plt.show()
+
 
 if __name__ == '__main__':
     main()
